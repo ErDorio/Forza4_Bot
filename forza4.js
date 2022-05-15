@@ -32,8 +32,6 @@ function newGame()
             table[i][j] = "0";
         }
     }
-    if(connection.state === 'disconnected') 
-        openDatabase();
 }
 function stopGame(msg)
 {
@@ -70,19 +68,26 @@ function insertCoin(column, player)
         }
     }
 }
-function openDatabase()
-{
-    connection.connect((err) =>
-    {
-        if(err) throw err;
-        console.log("Connected");
-    });
-}
+// function openDatabase()
+// {
+//     connection.connect((err) =>
+//     {
+//         if(err) throw err;
+//         console.log("Connected");
+//     });
+// }
 
 //Start e Stop
 const bot = new TGBot(pat,
 {
     polling: true    
+});
+
+//Apri connessione
+connection.connect((err) =>
+{
+    if(err) throw err;
+    console.log("Connected");
 });
 
 bot.onText(/\/start/, (msg) =>
